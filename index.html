@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>リンゴで学ぶ一次方程式</title>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="overlay" id="setupOverlay">
+    <h1>🍎 値段を決めてください 🍎</h1>
+    <p>1円 〜 10円 のあいだで決めてね</p>
+    
+    <div class="price-input-container">
+      <div class="custom-number-input">
+        <input type="number" id="applePriceInput" value="5" min="1" max="10" readonly>
+        <div class="spinner-btns">
+          <button class="spin-btn up" onclick="adjustPrice(1)">▲</button>
+          <button class="spin-btn down" onclick="adjustPrice(-1)">▼</button>
+        </div>
+      </div>
+      <span class="unit-label">円</span>
+    </div>
+
+    <button class="start-btn" onclick="startGame()">決定してスタート</button>
+  </div>
+
+  <div class="overlay" id="qrOverlay">
+    <h2>友達に問題を渡そう！</h2>
+    <p>カメラで読み取ってね</p>
+    <div id="qrCodeArea"></div>
+    <button class="start-btn close-btn" onclick="closeQr()">閉じる</button>
+  </div>
+
+  <div class="overlay" id="winOverlay">
+    <div class="win-title">🎉 正解！！ 🎉</div>
+    <div class="win-price" id="resultPriceDisplay"></div>
+    <button class="start-btn" onclick="resetToUrl()">もう一度あそぶ</button>
+  </div>
+
+  <header>
+    <h1>🍎 リンゴで学ぶ一次方程式</h1>
+  </header>
+
+  <div class="status-bar" id="statusBar">
+    まずは式を複雑にして、問題を作ってください
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <button id="btnApplePlus" class="btn btn-apple-plus" onclick="operate('apple', 1)">+🍎</button>
+      <button id="btnAppleMinus" class="btn btn-apple-minus" onclick="operate('apple', -1)">-🍎</button>
+    </div>
+    
+    <div class="control-group">
+      <button class="btn btn-money-plus" onclick="operate('money', 1)">+1</button>
+      <button class="btn btn-money-minus" onclick="operate('money', -1)">-1</button>
+      <button class="btn btn-money-gold-plus" onclick="operate('money', 10)">+10</button>
+      <button class="btn btn-money-gold-minus" onclick="operate('money', -10)">-10</button>
+    </div>
+
+    <div class="control-group">
+      <button class="btn btn-mult" onclick="operate('mult', 2)">×2</button>
+      <button class="btn btn-mult" onclick="operate('mult', 3)">×3</button>
+      <button class="btn btn-div" onclick="operate('div', 2)">÷2</button>
+      <button class="btn btn-div" onclick="operate('div', 3)">÷3</button>
+    </div>
+
+    <div class="control-group action-group">
+      <button class="btn btn-set" id="setBtn" onclick="setProblem()">出題</button>
+      <button class="btn btn-share" id="shareBtn" onclick="showQrCode()" disabled>QRコード作成</button>
+      <button class="btn btn-reset" onclick="resetToUrl()">値段設定に戻る</button>
+    </div>
+  </div>
+
+  <div class="view-controls" id="viewControls" style="display:none;">
+    <button class="btn btn-view active" onclick="changeView('icon')">🍎 イラスト</button>
+    <button class="btn btn-view" onclick="changeView('x')">𝒙 リンゴをxに</button>
+    <button class="btn btn-view" onclick="changeView('group')">xをまとめて表示</button>
+  </div>
+
+  <div class="stage-container">
+    <div class="side-box">
+      <div class="side-label">左辺</div>
+      <div class="items-area" id="leftSideArea"></div>
+    </div>
+    <div class="equal-sign">＝</div>
+    <div class="side-box">
+      <div class="side-label">右辺</div>
+      <div class="items-area" id="rightSideArea"></div>
+    </div>
+  </div>
+
+  <footer style="margin-top:50px; padding:20px; text-align:center; border-top:1px solid #eee; background-color:#fafafa;">
+    <a href="https://sites.google.com/view/k-system-lab/ホーム" target="_blank" style="color:#007bff; text-decoration:none; font-weight:bold;">
+      🏠 K-System Lab (ホーム) に戻る
+    </a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
