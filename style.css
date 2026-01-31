@@ -1,0 +1,352 @@
+/* --- CSS START --- */
+
+:root {
+  --bg-color: #e0f7fa;
+  --apple-color: #ff8a80;
+  --btn-blue: #90caf9;
+  --btn-purple: #ce93d8;
+  --btn-green: #2ecc71;
+  --btn-orange: #ffab91;
+  --header-height: 50px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #333;
+  height: 100vh; 
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ヘッダー */
+header {
+  background-color: #e0f2f1;
+  padding: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+  z-index: 10;
+}
+h1 { margin: 0; font-size: 1.2rem; color: #00695c; }
+
+/* ステータスバー */
+.status-bar {
+  background-color: #fff9c4;
+  padding: 8px;
+  font-weight: bold;
+  color: #f57f17;
+  font-size: 0.9rem;
+  border-bottom: 2px solid #fbc02d;
+  flex-shrink: 0;
+}
+
+/* 操作パネルエリア */
+.controls {
+  background-color: #fff;
+  padding: 8px 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.control-group {
+  display: flex;
+  gap: 3px;
+  margin: 2px;
+}
+
+/* 長いラベルのボタンがあるグループ用 */
+.action-group {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  white-space: nowrap;
+  min-width: 40px;
+  touch-action: manipulation;
+}
+.btn:active { transform: scale(0.95); }
+.btn:disabled { background-color: #bdbdbd; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-apple-plus { background-color: #ef9a9a; }
+.btn-apple-minus { background-color: #e57373; }
+.btn-money-plus { background-color: #2e7d32; }
+.btn-money-minus { background-color: #81c784; }
+.btn-money-gold-plus { background-color: #fbc02d; color: #333; }
+.btn-money-gold-minus { background-color: #ffb74d; color: #333;}
+.btn-mult { background-color: var(--btn-blue); color: #333; }
+.btn-div { background-color: var(--btn-purple); color: #fff; }
+
+.btn-set { background-color: #009688; box-shadow: 0 3px 0 #00796b; }
+
+/* ラベル変更に伴うボタン色調整 */
+.btn-share { background-color: #3f51b5; box-shadow: 0 3px 0 #303f9f; }
+.btn-reset { background-color: #78909c; box-shadow: 0 3px 0 #546e7a; }
+
+/* 表示切替ボタン */
+.view-controls {
+  margin-top: 0;
+  padding: 5px;
+  background: #f5f5f5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-view {
+  background-color: #9fa8da;
+  color: white;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  border-radius: 15px;
+  border: none;
+}
+.btn-view.active {
+  background-color: #3949ab;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* === メインステージ === */
+.stage-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+  padding: 10px;
+  flex-grow: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.side-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px dashed #b2dfdb;
+  border-radius: 15px;
+  background-color: rgba(255,255,255,0.7);
+  overflow-y: auto;
+  position: relative;
+  padding-top: 40px;
+}
+
+.side-label {
+  position: absolute;
+  top: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00796b;
+  background-color: #e0f2f1;
+  padding: 2px 15px;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+.items-area {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 4px;
+  padding: 10px;
+  padding-bottom: 50px;
+}
+
+.equal-sign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #555;
+  width: 30px;
+  flex-shrink: 0;
+}
+
+/* フッターエリア */
+.footer-area {
+  flex-shrink: 0;
+  background: #f1f1f1;
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* === アイテム表示 === */
+.apple-icon {
+  width: 34px; height: 34px;
+  background: radial-gradient(circle at 30% 30%, #ff5252, #b71c1c);
+  border-radius: 50% 50% 40% 40%;
+  position: relative; box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  margin: 2px; flex-shrink: 0;
+}
+.apple-icon::before { content: ''; position: absolute; top: -4px; left: 50%; width: 8px; height: 4px; background-color: #4caf50; border-radius: 10px 0; }
+.apple-icon::after { content: ''; position: absolute; top: -2px; left: 45%; width: 2px; height: 4px; background-color: #795548; }
+.apple-minus { filter: hue-rotate(180deg); opacity: 0.9; }
+.apple-hidden { background: radial-gradient(circle at 30% 30%, #bdbdbd, #757575); filter: none; }
+.apple-hidden::after { content: '?'; position: absolute; top: 6px; left: 11px; color: white; font-size: 1.1rem; font-weight: bold; }
+.apple-hidden.apple-minus::after { content: '-?'; left: 8px; }
+
+.coin {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; justify-content: center; align-items: center;
+  font-weight: bold; font-size: 0.8rem;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.2); border: 2px solid rgba(0,0,0,0.1);
+  margin: 2px; flex-shrink: 0; user-select: none;
+}
+.coin-10 { background: linear-gradient(135deg, #d4a373 0%, #a96e48 100%); color: #5d4037; border-color: #8d6e63; }
+.coin-10::before { content: '10'; }
+.coin-1.coin-minus::before { content: '-1'; }
+.coin-1 { background: linear-gradient(135deg, #f5f5f5 0%, #cfcfcf 100%); color: #616161; border-color: #bdbdbd; }
+.coin-1::before { content: '1'; }
+.coin-minus { filter: hue-rotate(180deg) sepia(0.3); opacity: 0.8; }
+
+/* xモード */
+.x-icon {
+  width: 34px; height: 34px;
+  display: flex; justify-content: center; align-items: center;
+  background-color: #fff;
+  border: 2px solid #5c6bc0;
+  border-radius: 5px;
+  color: #5c6bc0;
+  font-family: 'Times New Roman', serif; font-style: italic; font-weight: bold;
+  font-size: 1.3rem; margin: 2px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+.x-icon-minus { color: #c62828; border-color: #c62828; }
+.x-icon-minus::before { content: '-'; margin-right: 1px; }
+
+/* まとめて表示 */
+.grouped-box {
+  font-size: 2rem; font-weight: bold; margin: 10px;
+  padding: 5px 10px; border-radius: 10px; display: inline-block;
+}
+.grouped-x { color: #5c6bc0; font-family: 'Times New Roman', serif; font-style: italic; }
+.grouped-num { color: #f57f17; }
+.separator { width: 100%; height: 1px; background-color: rgba(0,0,0,0.1); margin: 5px 0; }
+.plus-sign { font-size: 1.2rem; color: #999; margin: 0 5px; display: inline-block; vertical-align: middle;}
+
+/* オーバーレイ共通 */
+.overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(255,255,255,0.98);
+  display: none;
+  flex-direction: column; justify-content: center; align-items: center;
+  z-index: 100;
+}
+#setupOverlay { display: flex; }
+#qrOverlay { background: rgba(0,0,0,0.8); color: white; }
+#qrCodeArea { background: white; padding: 15px; border-radius: 10px; margin: 20px; }
+#winOverlay { background: rgba(0,0,0,0.85); color: white; }
+
+/* === 画像①対応：カスタム数値入力 === */
+.price-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.custom-number-input {
+  display: flex;
+  border: 3px solid #009688;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+}
+.custom-number-input input[type="number"] {
+  width: 80px;
+  font-size: 2rem;
+  text-align: center;
+  border: none;
+  outline: none;
+  padding: 5px;
+  /* ブラウザ標準のスピナーを消す */
+  -moz-appearance: textfield; 
+}
+.custom-number-input input[type="number"]::-webkit-outer-spin-button,
+.custom-number-input input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.spinner-btns {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #009688;
+}
+.spin-btn {
+  width: 40px;
+  height: 50%;
+  background-color: #f1f1f1;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spin-btn:last-child { border-bottom: none; }
+.spin-btn:active { background-color: #ddd; }
+
+.unit-label {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.start-btn {
+  background-color: #ff7043; color: white; border: none;
+  padding: 12px 30px; font-size: 1.2rem; border-radius: 50px;
+  cursor: pointer; font-weight: bold; margin-top: 15px;
+  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.4);
+}
+.close-btn { background-color: #78909c; font-size: 1rem; padding: 10px 25px; }
+.win-title { font-size: 2.5rem; color: #ffeb3b; text-shadow: 0 0 10px #ff9800; animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.win-price { font-size: 1.5rem; margin: 20px; }
+@keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+/* === スマホ・縦向き最適化 === */
+@media (max-width: 600px) {
+  .stage-container { flex-direction: row; gap: 5px; padding: 5px; }
+  .side-box { border-width: 2px; padding-top: 30px; }
+  .side-label { font-size: 0.8rem; padding: 2px 10px; }
+  .equal-sign { font-size: 1.5rem; width: 20px; }
+  
+  .apple-icon, .coin, .x-icon { width: 28px; height: 28px; font-size: 0.7rem; }
+  .x-icon { font-size: 1rem; }
+  
+  .btn { padding: 8px 6px; font-size: 0.8rem; min-width: 35px; }
+  .controls { padding: 5px; gap: 4px; }
+  
+  .status-bar { font-size: 0.8rem; padding: 5px; }
+  h1 { font-size: 1rem; }
+}
+
+/* --- CSS END --- */
